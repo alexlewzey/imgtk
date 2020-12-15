@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+python-docx = "*"
+tqdm = "*"
+statsmodels = "*"
+fuzzywuzzy = "*"
+imgtk = {editable = true,path = "."}
+psutil = "*"
+pyxlsb = "*"
+pillow = "*"
+python-pptx = "*"
+numba = "*"
+umap-learn = "*"
+holidays = "*"
+faker = "*"
+torch = "*"
+torchvision = "*"
+
+[requires]
+python_version = "3.7"
