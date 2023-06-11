@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "imgtk"
+  site-url: "https://alexlewzey.github.io/imgtk"
+  description: "Tools to manipulate images"
+  repo-branch: main
+  repo-url: "https://github.com/alexlewzey/imgtk"
