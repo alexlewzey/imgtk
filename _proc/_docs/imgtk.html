@@ -99,16 +99,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="imgtk">
 <meta property="og:description" content="Tools to manipulate images">
-<meta property="og:image" content="https://alexlewzey.github.io/imgtk/00_imgtk_files/figure-html/cell-6-output-1.png">
 <meta property="og:site-name" content="imgtk">
-<meta property="og:image:height" content="259">
-<meta property="og:image:width" content="572">
 <meta name="twitter:title" content="imgtk">
 <meta name="twitter:description" content="Tools to manipulate images">
-<meta name="twitter:image" content="https://alexlewzey.github.io/imgtk/00_imgtk_files/figure-html/cell-6-output-1.png">
-<meta name="twitter:image-height" content="259">
-<meta name="twitter:image-width" content="572">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -289,37 +283,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><a href="https://alexlewzey.github.io/imgtk/imgtk.html#recolor"><code>recolor</code></a> sets color of non-blank image pixels to a single rgb value.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>recolor(dir_img <span class="op">/</span> <span class="st">"mole-no-background.png"</span>, dir_img <span class="op">/</span> <span class="st">"mole-pink.png"</span>, (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">255</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>imgs <span class="op">=</span> [Image.<span class="bu">open</span>(dir_img <span class="op">/</span> f) <span class="cf">for</span> f <span class="kw">in</span> [<span class="st">"mole-no-background.png"</span>, <span class="st">"mole-pink.png"</span>]]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>_, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">18</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> axs.flatten()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> img, ax, title <span class="kw">in</span> <span class="bu">zip</span>(imgs, axs, [<span class="st">"before"</span>, <span class="st">"after"</span>]):</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ax.imshow(img)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="00_imgtk_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
-</div>
-</div>
 <p>Test file is created by <a href="https://alexlewzey.github.io/imgtk/imgtk.html#recolor"><code>recolor</code></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rgb <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>blue_png <span class="op">=</span> dir_img <span class="op">/</span> <span class="st">"mole-blue.png"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> blue_png.exists():</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    blue_png.unlink()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>recolor(dir_img <span class="op">/</span> <span class="st">"mole-no-background.png"</span>, blue_png, rgb)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>test_eq(blue_png.exists(), <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rgb <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>blue_png <span class="op">=</span> dir_img <span class="op">/</span> <span class="st">"mole-blue.png"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> blue_png.exists():</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    blue_png.unlink()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>recolor(dir_img <span class="op">/</span> <span class="st">"mole-no-background.png"</span>, blue_png, rgb)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>test_eq(blue_png.exists(), <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Test <code>rgb</code> is equal to the most common pixel color in the target image.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> Image.<span class="bu">open</span>(blue_png)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pixels <span class="op">=</span> [img.getpixel((i, j)) <span class="cf">for</span> i, j <span class="kw">in</span> product(<span class="op">*</span><span class="bu">map</span>(<span class="bu">range</span>, img.size))]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pixel <span class="op">=</span> pd.Series(pixels).value_counts().index[<span class="dv">0</span>][:<span class="dv">3</span>]</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>test_eq(pixel, (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> Image.<span class="bu">open</span>(blue_png)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pixels <span class="op">=</span> [img.getpixel((i, j)) <span class="cf">for</span> i, j <span class="kw">in</span> product(<span class="op">*</span><span class="bu">map</span>(<span class="bu">range</span>, img.size))]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pixel <span class="op">=</span> pd.Series(pixels).value_counts().index[<span class="dv">0</span>][:<span class="dv">3</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>test_eq(pixel, (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p><a href="https://github.com/alexlewzey/imgtk/blob/main/imgtk/imgtk.py#L66" target="_blank" style="float:right; font-size:smaller">source</a></p>
@@ -354,25 +332,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><code>pixel_color()</code> will copy the color of the current mouse cursor position to the clipboard.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pixel_color()</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pyperclip.paste()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>'(24, 24, 24)'</code></pre>
-</div>
-</div>
-<p>The color can be returned in either rgb or hex format.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pixel_color('hex')</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pyperclip.paste()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>'#181818'</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>test_eq(rgb2hex(<span class="op">*</span>(<span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">24</span>)), <span class="st">"#181818"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># test_fail(lambda: pixel_color('wav'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test_eq(rgb2hex(<span class="op">*</span>(<span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">24</span>)), <span class="st">"#181818"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># test_fail(lambda: pixel_color('wav'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p><a href="https://github.com/alexlewzey/imgtk/blob/main/imgtk/imgtk.py#L77" target="_blank" style="float:right; font-size:smaller">source</a></p>

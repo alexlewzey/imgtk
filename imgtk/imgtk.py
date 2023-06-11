@@ -48,7 +48,7 @@ def recolor(
                 img.putpixel((x, y), color)
     img.save(trg)
 
-# %% ../nbs/00_imgtk.ipynb 17
+# %% ../nbs/00_imgtk.ipynb 15
 def pixel_rgb() -> Tuple[int, int, int]:
     """Return the rgb of current mouse cursor position."""
     return tuple(pyautogui.pixel(*pyautogui.position()))
@@ -62,7 +62,7 @@ def pixel_hex():
     """Return the hex of current mouse cursor position."""
     return rgb2hex(*pixel_rgb())
 
-# %% ../nbs/00_imgtk.ipynb 18
+# %% ../nbs/00_imgtk.ipynb 16
 def pixel_color(
     fmt: str = "rgb",  # format of retured color (rgb or hex) # fmt: skip
 ) -> None:
@@ -73,7 +73,7 @@ def pixel_color(
         raise ValueError(f"invalid format: {fmt}")
     pyperclip.copy(str(color))
 
-# %% ../nbs/00_imgtk.ipynb 24
+# %% ../nbs/00_imgtk.ipynb 18
 def main():
     fire.Fire({"fmter": fmter, "pixel_color": pixel_color, "recolor": recolor})
 
