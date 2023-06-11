@@ -22,19 +22,21 @@ from pillow_heif import register_heif_opener
 register_heif_opener()
 
 # %% ../nbs/00_imgtk.ipynb 5
-def fmter(src: Union[str, Path], # source image path
-          fmt: str = 'png' # target image format
-          ) -> None:
+def fmter(
+    src: Union[str, Path],  # source image path # fmt: skip
+    fmt: str = "png",  # target image format # fmt: skip
+) -> None:
     """Convert image format"""
     src = Path(src)
-    trg = src.parent / f'{src.stem}.{fmt}'
+    trg = src.parent / f"{src.stem}.{fmt}"
     Image.open(src).save(trg)
 
 # %% ../nbs/00_imgtk.ipynb 10
-def recolor(src: str, # source image path
-            trg: str, # target image path
-            color: tuple[int, int, int] # color to recolor to
-            ) -> None:
+def recolor(
+    src: str,  # source image path
+    trg: str,  # target image path
+    color: tuple[int, int, int],  # color to recolor to
+) -> None:
     """Recolor image except pixels with alpha=0"""
     src, trg = Path(src), Path(trg)
     img = Image.open(src)
@@ -50,7 +52,7 @@ def recolor(src: str, # source image path
 def pixel_rgb() -> Tuple[int, int, int]:
     """Return the rgb of current mouse cursor position."""
     return tuple(pyautogui.pixel(*pyautogui.position()))
-    
+
 
 def rgb2hex(r: int, g: int, b: int) -> str:
     return f"#{r:02X}{g:02X}{b:02X}"
@@ -59,23 +61,22 @@ def rgb2hex(r: int, g: int, b: int) -> str:
 def pixel_hex():
     """Return the hex of current mouse cursor position."""
     return rgb2hex(*pixel_rgb())
-    
 
 # %% ../nbs/00_imgtk.ipynb 18
-def pixel_color(fmt: str = 'rgb' # format of retured color (rgb or hex)
-                ) -> None:
+def pixel_color(
+    fmt: str = "rgb",  # format of retured color (rgb or hex) # fmt: skip
+) -> None:
     """Add the color of current mouse cursor position to the clipboard."""
     try:
-        color = {'rgb': pixel_rgb, 'hex': pixel_hex}[fmt]()
+        color = {"rgb": pixel_rgb, "hex": pixel_hex}[fmt]()
     except KeyError:
-        raise ValueError(f'invalid format: {fmt}')
+        raise ValueError(f"invalid format: {fmt}")
     pyperclip.copy(str(color))
-        
 
 # %% ../nbs/00_imgtk.ipynb 24
-def main(): fire.Fire({
-    'fmter': fmter,
-    'pixel_color': pixel_color,
-    'recolor': recolor,}
-    )
-if __name__ =='__main__': main()
+def main():
+    fire.Fire({"fmter": fmter, "pixel_color": pixel_color, "recolor": recolor})
+
+
+if __name__ == "__main__":
+    main()
