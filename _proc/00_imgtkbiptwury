@@ -1,0 +1,169 @@
+# %%NBQA-CELL-SEPf0cc37
+# | default_exp imgtk
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | hide
+from nbdev.showdoc import *
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+from itertools import product
+from pathlib import Path
+from typing import *
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import pyautogui
+import pyperclip
+from fastcore.test import *
+import fire
+from matplotlib.image import imread
+from PIL import Image
+from pillow_heif import register_heif_opener
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+register_heif_opener()
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+
+
+def fmter(
+    src: Union[str, Path],  # source image path # fmt: skip
+    fmt: str = "png",  # target image format # fmt: skip
+) -> None:
+    """Convert image format"""
+    src = Path(src)
+    trg = src.parent / f"{src.stem}.{fmt}"
+    Image.open(src).save(trg)
+
+
+# %%NBQA-CELL-SEPf0cc37
+dir_img = Path("images").absolute()
+if (dir_img / "mole.png").exists():
+    (dir_img / "mole.png").unlink()
+fmter(dir_img / "mole.jpg", "png")
+test_eq((dir_img / "mole.png").exists(), True)
+
+
+# %%NBQA-CELL-SEPf0cc37
+test_eq(imread(dir_img / "mole.jpg").shape, imread(dir_img / "mole.png").shape)
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+
+
+def recolor(
+    src: str,  # source image path
+    trg: str,  # target image path
+    color: tuple[int, int, int],  # color to recolor to
+) -> None:
+    """Recolor image except pixels with alpha=0"""
+    src, trg = Path(src), Path(trg)
+    img = Image.open(src)
+    width, height = img.size
+    for x in range(width):
+        for y in range(height):
+            rgba = img.getpixel((x, y))
+            if rgba[-1] != 0:
+                img.putpixel((x, y), color)
+    img.save(trg)
+
+
+# %%NBQA-CELL-SEPf0cc37
+recolor(dir_img / "mole-no-background.png", dir_img / "mole-pink.png", (255, 0, 255))
+
+imgs = [Image.open(dir_img / f) for f in ["mole-no-background.png", "mole-pink.png"]]
+_, axs = plt.subplots(1, 2, figsize=(10, 18))
+axs = axs.flatten()
+for img, ax, title in zip(imgs, axs, ["before", "after"]):
+    ax.imshow(img)
+    ax.axis("off")
+    ax.set_title(title)
+plt.show()
+
+
+# %%NBQA-CELL-SEPf0cc37
+rgb = (0, 0, 255)
+blue_png = dir_img / "mole-blue.png"
+if blue_png.exists():
+    blue_png.unlink()
+recolor(dir_img / "mole-no-background.png", blue_png, rgb)
+test_eq(blue_png.exists(), True)
+
+
+# %%NBQA-CELL-SEPf0cc37
+img = Image.open(blue_png)
+pixels = [img.getpixel((i, j)) for i, j in product(*map(range, img.size))]
+pixel = pd.Series(pixels).value_counts().index[0][:3]
+test_eq(pixel, (0, 0, 255))
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+# | hide
+
+
+def pixel_rgb() -> Tuple[int, int, int]:
+    """Return the rgb of current mouse cursor position."""
+    return tuple(pyautogui.pixel(*pyautogui.position()))
+
+
+def rgb2hex(r: int, g: int, b: int) -> str:
+    return f"#{r:02X}{g:02X}{b:02X}"
+
+
+def pixel_hex():
+    """Return the hex of current mouse cursor position."""
+    return rgb2hex(*pixel_rgb())
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+def pixel_color(
+    fmt: str = "rgb",  # format of retured color (rgb or hex) # fmt: skip
+) -> None:
+    """Add the color of current mouse cursor position to the clipboard."""
+    try:
+        color = {"rgb": pixel_rgb, "hex": pixel_hex}[fmt]()
+    except KeyError:
+        raise ValueError(f"invalid format: {fmt}")
+    pyperclip.copy(str(color))
+
+
+# %%NBQA-CELL-SEPf0cc37
+# pixel_color()
+# pyperclip.paste()
+
+
+# %%NBQA-CELL-SEPf0cc37
+# pixel_color('hex')
+# pyperclip.paste()
+
+
+# %%NBQA-CELL-SEPf0cc37
+test_eq(rgb2hex(*(24, 24, 24)), "#181818")
+# test_fail(lambda: pixel_color('wav'))
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | export
+def main():
+    fire.Fire({"fmter": fmter, "pixel_color": pixel_color, "recolor": recolor})
+
+
+if __name__ == "__main__":
+    main()
+
+
+# %%NBQA-CELL-SEPf0cc37
+# | hide
+import nbdev
+
+nbdev.nbdev_export()
